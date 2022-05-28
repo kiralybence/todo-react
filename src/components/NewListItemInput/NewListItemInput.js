@@ -1,25 +1,25 @@
 import './NewListItemInput.css';
+import { useState } from 'react';
 
-function NewListItemInput(addItem) {
-    let draft = '';
+function NewListItemInput(props) {
+    const [draft, setDraft] = useState('');
 
-    // TODO: find a better naming convention (maybe props should have the emit prefix)
-    function emitAddItem() {
-        addItem(draft.trim());
-        draft = '';
+    function addItem() {
+        props.addItem(draft.trim());
+        setDraft('');
     }
 
     return (
         <div>
             <textarea
                 rows="8"
-                onChange={(e) => draft = e.target.value}
+                onChange={(e) => setDraft(e.target.value)}
             ></textarea>
 
             <br />
 
             <button
-                onClick={emitAddItem}
+                onClick={addItem}
                 disabled={!draft.trim().length}
             >Add</button>
         </div>

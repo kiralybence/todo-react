@@ -1,9 +1,10 @@
 import './App.css';
 import List from '../List/List';
 import NewListItemInput from '../NewListItemInput/NewListItemInput';
+import { useState } from 'react';
 
 function App() {
-    let items = [];
+    const [items, setItems] = useState([]);
 
     function getNewId() {
         if (!items.length) {
@@ -24,7 +25,7 @@ function App() {
     }
 
     function removeItem(id) {
-        items = items.filter(item => item.id !== id);
+        setItems(items.filter(item => item.id !== id));
     }
 
     return (

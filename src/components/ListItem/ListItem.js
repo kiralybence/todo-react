@@ -1,15 +1,16 @@
 import './ListItem.css';
 import ListItemEditor from '../ListItemEditor/ListItemEditor';
+import { useState } from 'react';
 
-function ListItem(item, removeItem) {
-    let isEditing = false;
+function ListItem(props) {
+    const [isEditing, setIsEditing] = useState(false);
 
     function toggleCompleted() {
-        item.completed = !item.completed;
+        props.item.completed = !props.item.completed;
     }
 
     function toggleEditor() {
-        isEditing = !isEditing;
+        setIsEditing(!isEditing);
     }
 
     return (
@@ -17,10 +18,10 @@ function ListItem(item, removeItem) {
             {!isEditing ? (
                 <div>
                     <span
-                        className={`item ${item.completed ? 'strikethrough' : ''}`}
+                        className={`item ${props.item.completed ? 'strikethrough' : ''}`}
                         onClick={toggleCompleted}
                     >
-                        {item.description}
+                        {props.item.description}
                     </span>
 
                     <button
@@ -28,12 +29,12 @@ function ListItem(item, removeItem) {
                     >Edit</button>
 
                     <button
-                        onClick={removeItem}
+                        onClick={props.removeItem}
                     >Remove</button>
                 </div>
             ) : (
                 <ListItemEditor
-                    item={item}
+                    item={props.item}
                     editSaved={toggleEditor}
                     editCancelled={toggleEditor}
                 />
