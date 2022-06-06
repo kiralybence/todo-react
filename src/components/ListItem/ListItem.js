@@ -1,43 +1,32 @@
 import './ListItem.css';
 import ListItemEditor from '../ListItemEditor/ListItemEditor';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeItem, toggleCompleted, toggleIsEditing } from '../List/listSlice';
 
 function ListItem(props) {
-    const [isEditing, setIsEditing] = useState(false);
-
-    function toggleCompleted() {
-        props.item.completed = !props.item.completed;
-    }
-
-    function toggleEditor() {
-        setIsEditing(!isEditing);
-    }
+    const dispatch = useDispatch();
 
     return (
         <li>
-            {!isEditing ? (
+            {!props.item.isEditing ? (
                 <div>
                     <span
                         className={`item ${props.item.completed ? 'strikethrough' : ''}`}
-                        onClick={toggleCompleted}
+                        onClick={() => dispatch(toggleCompleted(props.item.id))}
                     >
                         {props.item.description}
                     </span>
 
                     <button
-                        onClick={toggleEditor}
+                        onClick={() => dispatch(toggleIsEditing(props.item.id))}
                     >Edit</button>
 
                     <button
-                        onClick={props.removeItem}
+                        onClick={() => dispatch(removeItem(props.item.id))}
                     >Remove</button>
                 </div>
             ) : (
-                <ListItemEditor
-                    item={props.item}
-                    editSaved={toggleEditor}
-                    editCancelled={toggleEditor}
-                />
+                <ListItemEditor item={props.item} />
             )}
         </li>
     );

@@ -1,14 +1,18 @@
 import './List.css';
 import ListItem from '../ListItem/ListItem';
+import { useSelector } from 'react-redux';
+import { selectItems } from './listSlice';
 
-function List(props) {
+function List() {
+    const items = useSelector(selectItems);
+
     return (
         <ul>
-            {props.items.map(item => {
+            {items.map(item => {
                 return (
                     <ListItem
                         item={item}
-                        removeItem={props.removeItem}
+                        key={item.id}
                     />
                 );
             })}

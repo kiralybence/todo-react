@@ -1,11 +1,14 @@
 import './NewListItemInput.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../List/listSlice';
 
-function NewListItemInput(props) {
+function NewListItemInput() {
     const [draft, setDraft] = useState('');
+    const dispatch = useDispatch();
 
-    function addItem() {
-        props.addItem(draft.trim());
+    function submit() {
+        dispatch(addItem(draft.trim()));
         setDraft('');
     }
 
@@ -13,13 +16,14 @@ function NewListItemInput(props) {
         <div>
             <textarea
                 rows="8"
-                onChange={(e) => setDraft(e.target.value)}
-            ></textarea>
+                onChange={e => setDraft(e.target.value)}
+                value={draft}
+            />
 
             <br />
 
             <button
-                onClick={addItem}
+                onClick={submit}
                 disabled={!draft.trim().length}
             >Add</button>
         </div>

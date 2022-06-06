@@ -1,24 +1,28 @@
 import './ListItemEditor.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleIsEditing, updateItem } from '../List/listSlice';
 
 function ListItemEditor(props) {
     const [draft, setDraft] = useState(props.item.description);
+    const dispatch = useDispatch();
 
     function save() {
-        props.item.description = draft.trim();
-        props.editSaved();
+        dispatch(updateItem({ id: props.item.id, description: draft.trim() }));
+        dispatch(toggleIsEditing(props.item.id));
     }
 
     function cancel() {
         setDraft(props.item.description);
-        props.editCancelled();
+        dispatch(toggleIsEditing(props.item.id));
     }
 
     return (
         <div>
             <input
                 type="text"
-                onChange={(e) => setDraft(e.target.value)}
+                onChange={e => setDraft(e.target.value)}
+                value={draft.toString()}
             />
 
             <button
