@@ -1,4 +1,4 @@
-import './ListItemEditor.css';
+import styles from './ListItemEditor.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleIsEditing, updateItem } from '../List/listSlice';
@@ -26,11 +26,13 @@ function ListItemEditor(props) {
             />
 
             <button
+                className={styles.button}
                 onClick={save}
                 disabled={!draft.trim().length}
             >Save</button>
 
             <button
+                className={styles.button}
                 onClick={cancel}
             >Cancel</button>
         </div>

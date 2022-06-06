@@ -1,4 +1,4 @@
-import './List.css';
+import styles from './List.module.css';
 import ListItem from '../ListItem/ListItem';
 import { useSelector } from 'react-redux';
 import { selectItems } from './listSlice';

@@ -1,8 +1,8 @@
-textarea {
+.textarea {
     width: 100%;
     resize: none;
 }
 
-button {
+.button {
     padding: 10px 50px;
 }

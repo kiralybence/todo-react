@@ -1,4 +1,4 @@
-import './ListItem.css';
+import styles from './ListItem.module.css';
 import ListItemEditor from '../ListItemEditor/ListItemEditor';
 import { useDispatch } from 'react-redux';
 import { removeItem, toggleCompleted, toggleIsEditing } from '../List/listSlice';
@@ -11,17 +11,19 @@ function ListItem(props) {
             {!props.item.isEditing ? (
                 <div>
                     <span
-                        className={`item ${props.item.completed ? 'strikethrough' : ''}`}
+                        className={`${styles.item} ${props.item.completed ? styles.strikethrough : ''}`}
                         onClick={() => dispatch(toggleCompleted(props.item.id))}
                     >
                         {props.item.description}
                     </span>
 
                     <button
+                        className={styles.button}
                         onClick={() => dispatch(toggleIsEditing(props.item.id))}
                     >Edit</button>
 
                     <button
+                        className={styles.button}
                         onClick={() => dispatch(removeItem(props.item.id))}
                     >Remove</button>
                 </div>

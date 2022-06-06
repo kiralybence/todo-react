@@ -1,4 +1,4 @@
-import './NewListItemInput.css';
+import styles from './NewListItemInput.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../List/listSlice';
@@ -15,6 +15,7 @@ function NewListItemInput() {
     return (
         <div>
             <textarea
+                className={styles.textarea}
                 rows="8"
                 onChange={e => setDraft(e.target.value)}
                 value={draft}
@@ -23,6 +24,7 @@ function NewListItemInput() {
             <br />
 
             <button
+                className={styles.button}
                 onClick={submit}
                 disabled={!draft.trim().length}
             >Add</button>
